@@ -257,6 +257,7 @@ showDashboardBtn.addEventListener('click', () => {
   
   dashboard.style.display = 'block';
 });
+  document.getElementById('downloadCSV').addEventListener('click', downloadCSV);
 
 // Phase 4: Charts functionality
 showChartsBtn.addEventListener('click', () => {
@@ -885,4 +886,23 @@ function getChartTitle(chartType) {
   }
   
   return 'Chart';
+}
+function downloadCSV() {
+  // Create data with only selected columns
+  const exportData = state.filteredData.map(row => {
+    const filteredRow = {};
+    state.selectedColumns.forEach(column => {
+      filteredRow[column] = row[column];
+    });
+    return filteredRow;
+  });
+  
+  const csvString = Papa.unparse(exportData);
+  const blob = new Blob([csvString], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'filtered-data.csv';
+  a.click();
+  URL.revokeObjectURL(url);
 }
