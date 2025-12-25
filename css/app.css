@@ -23,7 +23,11 @@ body {
   text-align: left;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
+.export-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px; /* optional */
+}
 .app-header h1 {
   margin: 0;
   font-size: 20px;
@@ -865,3 +869,4 @@ input[type="file"] {
     text-align: center;
   }
 }
+
